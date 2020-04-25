@@ -1,6 +1,9 @@
 #ifndef SWEKTOR_HH
 #define SWEKTOR_HH
 
+#include <LZespolona.hh>
+#include <rozmiar.h>
+
 #include <iostream>
 #include <cmath>
 
@@ -36,7 +39,7 @@ class SWektor {
 
     SWektor <typ, rozmiar> iloczyn_wektorowy (const SWektor <typ, rozmiar> Wek) const;    // Relizuje mnozenie (iloczyn
                                                                                           // wektorowy) wektorow
-    //typ dlugosc_wektora () const;    // Oblicza długość wektora
+    double dlugosc_wektora () const;    // Oblicza długość wektora
 };
 
 
@@ -192,6 +195,44 @@ std::ostream & operator << (std::ostream & Str, const SWektor <typ, rozmiar> & W
     }
 
     return Str;
+}
+
+
+
+/*
+ * Oblicza długość wektora. (specjalizacja dla liczb typu double)
+ */
+template<>
+double SWektor<double, ROZMIAR>::dlugosc_wektora () const
+{
+    double pomd;
+
+    pomd = sqrt(*this * *this);
+
+    return pomd;
+}
+
+
+
+/*
+ * Oblicza długość wektora. (specjalizacja dla liczb zespolonych)
+ */
+template<>
+double SWektor<LZespolona, ROZMIAR>::dlugosc_wektora () const
+{
+    unsigned int i;
+    double pomd = 0;
+    LZespolona pomLZ;
+
+    for (i = 0; i < ROZMIAR; ++i)
+    {
+        pomLZ = (*this)[i] * Sprzezenie((*this)[i]);
+        pomd += pomLZ.re;
+    }
+
+    pomd = sqrt(pomd);
+
+    return pomd;
 }
 
 #endif

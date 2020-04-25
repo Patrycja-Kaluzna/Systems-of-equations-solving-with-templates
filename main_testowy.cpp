@@ -1,4 +1,5 @@
 #include "SWektor.hh"
+#include "SMacierz.hh"
 #include "rozmiar.h"
 #include "LZespolona.hh"
 
@@ -51,6 +52,11 @@ int main ()
         cout << "Rozmiar jest różny od 3 - niespełniona definicja iloczynu wektorowego" << endl;
     }
 
+    cout << "Test dlugośći wektora:" << endl;
+
+    dWynik = Wekd.dlugosc_wektora();
+    cout << "|Wek| = " << dWynik << endl;
+
     cout << "TEST KLASY WEKTOR <LZespolona, " << ROZMIAR << ">:" << endl;
 
     SWektor <LZespolona, ROZMIAR> WekLZ, WynikLZ;
@@ -93,4 +99,9 @@ int main ()
     } else {
         cout << "Rozmiar jest różny od 3 - niespełniona definiacja iloczynu wektorowego" << endl;
     }
+
+    cout << "Test dlugośći wektora:" << endl;
+
+    dWynik = WekLZ.dlugosc_wektora();
+    cout << "|Wek| = " << dWynik << endl;
 }
