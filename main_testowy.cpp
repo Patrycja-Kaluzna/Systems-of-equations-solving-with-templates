@@ -9,99 +9,90 @@ using namespace std;
 
 int main ()
 {
-    cout << "TEST KLASY WEKTOR <double, " << ROZMIAR << ">:" << endl;
-
-    SWektor <double, ROZMIAR> Wekd, Wynikd;
-    double Lic, dWynik;
+    cout << "TEST SZABLONU KLASY SMACIERZ <double, " << ROZMIAR << ">:" << endl;
+    SMacierz <double, ROZMIAR> Macd, Wynikd;
     
-    cout << "Test wczytywania i wyświetlania wektora:" << endl;
+    cout << "Test wczytywania i wyświetlania macierzy:" << endl;
+    cout << "Podaj kolumny: ";
+    cin >> Macd;
+    cout << "Mac:" << endl << Macd;
 
-    cout << "Podaj współrzędne: ";
+    cout << "Test podnoszenia do kwadratu kazdego z elementow miacierzy:" << endl;
+    Wynikd = Macd.elementy2();
+    cout << "Mac^2:" << endl << Wynikd;
+
+    cout << "Test zamiany kolumn o zadanych indeksach:" << endl;
+    int ind1, ind2;
+    cout << "Podaj indeks 1. kolumny: ";
+    cin >> ind1;
+    cout << "Podaj indeks 2. kolumny: ";
+    cin >> ind2;
+    Macd.zamien_kolumny(ind1, ind2);
+    cout << "Macierz po zamianie kolumn:" << endl << Macd;
+
+    cout << "Test podmiany kolumny macierzy z wektorem:" << endl;
+    SWektor <double, ROZMIAR> Wekd;
+    cout << "Podaj wspolrzedne wektora Wek: ";
     cin >> Wekd;
-    cout << "Wek = " << Wekd << endl;
+    cout << "Podaj wspolrzedne kolumny do podmiany: ";
+    cin >> ind1;
+    Wynikd = Macd.podmien_kolumne(ind1, Wekd);
+    cout << "Macierz po podmianie:" << endl << Wynikd;
 
-    cout << "Test dodawania i odejmowania wektorów:" << endl;
+    cout << "Test transpozycji macierzy:" << endl;
+    Wynikd = Wynikd.transponuj();
+    cout << "Mac^T:" << endl << Wynikd;
 
-    Wynikd = Wekd + Wekd;
-    cout << "Wek + Wek = " << Wynikd << endl;
-    Wynikd = Wekd - Wekd;
-    cout << "Wek - Wek = " << Wynikd << endl;
-    
-    cout << "Test iloczynu skalarnego:" << endl;
+    cout << "Test mnozenia macierzy z wektorem:" << endl;
+    Wekd = Wynikd * Wekd;
+    cout << "Mac * Wek = " << Wekd << endl;
 
-    dWynik = Wekd * Wekd;
-    cout << "Wek * Wek = " << dWynik << endl;
-    
-    cout << "Test mnożenia i dzielenia wektora przez liczbę:" << endl;
+    cout << "Test obliczania wyznacznika macierzy metoda eliminacji Gaussa:" << endl;
+    double pomd;
+    pomd = Wynikd.oblicz_wyznacznik();
+    cout << "Det Mac = " << pomd << endl;
 
-    cout << "Podaj liczbę: ";
-    cin >> Lic;
-    cout << "Lic = " << Lic << endl;
-    Wynikd = Wekd * Lic;
-    cout << "Wek * Lic = " << Wynikd << endl;
-    Wynikd = Wekd / Lic;
-    cout << "Wek / Lic = " << Wynikd << endl;
-    
-    cout << "Test iloczynu wektorowego:" << endl;
 
-    if (ROZMIAR == 3)
-    {
-        Wynikd = Wekd.iloczyn_wektorowy(Wekd);
-        cout << "Wek x Wek = " << Wynikd << endl;
-    } else {
-        cout << "Rozmiar jest różny od 3 - niespełniona definicja iloczynu wektorowego" << endl;
-    }
+    cout << "TEST SZABLONU KLASY SMACIERZ <LZespolona, " << ROZMIAR << ">:" << endl;
+    SMacierz <LZespolona, ROZMIAR> MacLZ, WynikLZ;
 
-    cout << "Test dlugośći wektora:" << endl;
+    cout << "Test wczytywania i wyświetlania macierzy:" << endl;
+    cout << "Podaj kolumny: ";
+    cin >> MacLZ;
+    cout << "Mac:" << endl << MacLZ;
 
-    dWynik = Wekd.dlugosc_wektora();
-    cout << "|Wek| = " << dWynik << endl;
+    cout << "Test podnoszenia do kwadratu kazdego z elementow miacierzy:" << endl;
+    WynikLZ = MacLZ.elementy2();
+    cout << "Mac^2:" << endl << WynikLZ;
 
-    cout << "TEST KLASY WEKTOR <LZespolona, " << ROZMIAR << ">:" << endl;
+    cout << "Test zamiany kolumn o zadanych indeksach:" << endl;
+    int ind1, ind2;
+    cout << "Podaj indeks 1. kolumny: ";
+    cin >> ind1;
+    cout << "Podaj indeks 2. kolumny: ";
+    cin >> ind2;
+    MacLZ.zamien_kolumny(ind1, ind2);
+    cout << "Macierz po zamianie kolumn:" << endl << MacLZ;
 
-    SWektor <LZespolona, ROZMIAR> WekLZ, WynikLZ;
-    LZespolona LZWynik;
-    
-    cout << "Test wczytywania i wyświetlania wektora:" << endl;
-
-    cout << "Podaj współrzędne: ";
+    cout << "Test podmiany kolumny macierzy z wektorem:" << endl;
+    SWektor <LZespolona, ROZMIAR> WekLZ;
+    cout << "Podaj wspolrzedne wektora Wek: ";
     cin >> WekLZ;
-    cout << "Wek = " << WekLZ << endl;
+    cout << "Podaj wspolrzedne kolumny do podmiany: ";
+    cin >> ind1;
+    WynikLZ = MacLZ.podmien_kolumne(ind1, WekLZ);
+    cout << "Macierz po podmianie:" << endl << WynikLZ;
 
-    cout << "Test dodawania i odejmowania wektorów:" << endl;
+    cout << "Test transpozycji macierzy:" << endl;
+    WynikLZ = WynikLZ.transponuj();
+    cout << "Mac^T:" << endl << WynikLZ;
 
-    WynikLZ = WekLZ + WekLZ;
-    cout << "Wek + Wek = " << WynikLZ << endl;
-    WynikLZ = WekLZ - WekLZ;
-    cout << "Wek - Wek = " << WynikLZ << endl;
-    
-    cout << "Test iloczynu skalarnego:" << endl;
+    cout << "Test mnozenia macierzy z wektorem:" << endl;
+    WekLZ = WynikLZ * WekLZ;
+    cout << "Mac * Wek = " << WekLZ << endl;
 
-    LZWynik = WekLZ * WekLZ;
-    cout << "Wek * Wek = " << LZWynik << endl;
-    
-    cout << "Test mnożenia i dzielenia wektora przez liczbę:" << endl;
-
-    cout << "Podaj liczbę: ";
-    cin >> Lic;
-    cout << "Lic = " << Lic << endl;
-    WynikLZ = WekLZ * Lic;
-    cout << "Wek * Lic = " << WynikLZ << endl;
-    WynikLZ = WekLZ / Lic;
-    cout << "Wek / Lic = " << WynikLZ << endl;
-    
-    cout << "Test iloczynu wektorowego:" << endl;
-
-    if (ROZMIAR == 3)
-    {
-        WynikLZ = WekLZ.iloczyn_wektorowy(WekLZ);
-        cout << "Wek x Wek = " << WynikLZ << endl;
-    } else {
-        cout << "Rozmiar jest różny od 3 - niespełniona definiacja iloczynu wektorowego" << endl;
-    }
-
-    cout << "Test dlugośći wektora:" << endl;
-
-    dWynik = WekLZ.dlugosc_wektora();
-    cout << "|Wek| = " << dWynik << endl;
+    cout << "Test obliczania wyznacznika macierzy metoda eliminacji Gaussa:" << endl;
+    LZespolona pomLZ;
+    pomLZ = WynikLZ.oblicz_wyznacznik();
+    cout << "Det Mac = " << pomLZ << endl;
 }

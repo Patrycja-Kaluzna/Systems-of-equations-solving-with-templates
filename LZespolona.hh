@@ -24,13 +24,16 @@ struct LZespolona {
   LZespolona operator += (LZespolona LZ);   // Realizuje dodanie dwóch liczb zespolonych i podstawienie wyniku 
                                             // w miejcu pierwszej z nich
   LZespolona operator * (double lic) const;   // Realizuje mnożenie liczby zespolonej przez liczbę typu double
+
+  bool operator == (double lic) const; // Realizuje porownanie liczby zespolonej z liczba typu double
   
+  bool operator != (double lic) const;  // Realizuje porownanie liczby zespolonej z liczba typu double
 };
 
 /*
  * Realizuje dodawanie.
  */
-LZespolona  operator + (LZespolona, LZespolona);
+LZespolona operator + (LZespolona, LZespolona);
 
 /*
  * Realizuje odejmowanie.

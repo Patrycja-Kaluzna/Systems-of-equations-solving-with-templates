@@ -70,6 +70,60 @@ LZespolona LZespolona::operator * (double lic) const
 
 
 
+/*
+ * Metoda realizuje porównanie liczby
+ * zespolonej z liczbą typu double.
+ * 
+ * Argumenty:
+ *    - lic - liczba typu double, z którą
+ *            zostanie porównana liczba 
+ *            zespolona.
+ * 
+ * Zwraca:
+ *    True jeśli część rzeczywista jest równa 
+ *    lic i urojona 0, false jeśli częśc
+ *    rzeczywista jest różna od lic lub 
+ *    urojona różna od 0.
+ */ 
+bool LZespolona::operator == (double lic) const
+{
+  if (re == lic && im == 0)
+  {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+
+/*
+ * Metoda realizuje porównanie liczby
+ * zespolonej z liczbą typu double.
+ * 
+ * Argumenty:
+ *    - lic - liczba typu double, z którą
+ *            zostanie porównana liczba 
+ *            zespolona.
+ * 
+ * Zwraca:
+ *    True jeśli część rzeczywista jest różna
+ *    od lic i urojona równa 0, false jeśli
+ *    częśc rzeczywista jest równa lic lub
+ *    urojona różna od 0.
+ */ 
+bool LZespolona::operator != (double lic) const
+{
+  if (re != lic && im == 0)
+  {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+
 /*!
  * Realizuje dodawanie dwoch liczb zespolonych.
  * 
