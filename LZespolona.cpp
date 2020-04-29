@@ -80,14 +80,14 @@ LZespolona LZespolona::operator * (double lic) const
  *            zespolona.
  * 
  * Zwraca:
- *    True jeśli część rzeczywista jest równa 
- *    lic i urojona 0, false jeśli częśc
- *    rzeczywista jest różna od lic lub 
- *    urojona różna od 0.
+ *    True jeśli część rzeczywista i urojona 
+ *    są równe lic, false jeśli częśc
+ *    rzeczywista lub urojona jest 
+ *    różna od lic (ewentaulnie obie).
  */ 
 bool LZespolona::operator == (double lic) const
 {
-  if (re == lic && im == 0)
+  if (re == lic && im == lic)
   {
     return true;
   } else {
@@ -107,14 +107,14 @@ bool LZespolona::operator == (double lic) const
  *            zespolona.
  * 
  * Zwraca:
- *    True jeśli część rzeczywista jest różna
- *    od lic i urojona równa 0, false jeśli
- *    częśc rzeczywista jest równa lic lub
- *    urojona różna od 0.
+ *    True jeśli część rzeczywista lub urojona
+ *    jest różna od lic (ewentualnie obie),
+ *    false jeśli część rzeczywista i 
+ *    urojona są równe lic.
  */ 
 bool LZespolona::operator != (double lic) const
 {
-  if (re != lic && im == 0)
+  if (re != lic || im != lic)
   {
     return true;
   } else {

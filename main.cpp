@@ -1,6 +1,7 @@
-#include "Wektor.hh"
-#include "Macierz.hh"
-#include "UkladRownanLiniowych.hh"
+#include "rozmiar.hh"
+#include "SWektor.hh"
+#include "SMacierz.hh"
+#include "SUkladRownanLiniowych.hh"
 
 using namespace std;
 

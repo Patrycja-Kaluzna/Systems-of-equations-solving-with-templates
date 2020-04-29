@@ -1,19 +1,22 @@
-#ifndef MACIERZ_HH
-#define MACIERZ_HH
+#ifndef SMACIERZ_HH
+#define SMACIERZ_HH
 
-#include "SWektor.hh"
 #include "rozmiar.h"
+#include "SWektor.hh"
 
 #include <iostream>
 
 /*
- * Modeluje pojecie macierzy, ktorej
- * glowna cecha sa jej kolumny.
+ * Szablon klasy modelujacej pojecie macierzy, ktorej
+ * glowna cecha sa jej kolumny. Szablon jest 
+ * parametryzowany typem liczb będących wspołrzędnymi
+ * wektorow tworzacych kolumny oraz rozmiarem tych 
+ * wektorow, czyli ilością ich współrzędnych.
  */
 template <typename typ, int rozmiar> 
 class SMacierz {
   
-    SWektor <typ, rozmiar> kolumny [ROZMIAR];   // Kolumny macierzy
+    SWektor <typ, rozmiar> kolumny [rozmiar];   // Kolumny macierzy
     
     public:
 
