@@ -1,85 +1,69 @@
-#include "Wektor.hh"
-#include "Macierz.hh"
-#include "UkladRownanLiniowych.hh"
+#include "rozmiar.h"
+#include "SWektor.hh"
+#include "SMacierz.hh"
+#include "SUkladRownanLiniowych.hh"
 
-using namespace std;
+#include <iomanip>
 
-int main() 
+int main () 
 {   
-    UkladRownanLiniowych URL;
-    Wektor blad;
-    int a;
-
-    cin >> URL;
-    cout << "Układ rownań liniowych:" << endl << URL << endl;
-    a = URL.rozwiaz();
-    if (a == 0)
+    char pom;
+    int a, i;
+    std::cin >> pom;
+    switch (pom) 
     {
-        cout << "Wektor rozwiązania:" << endl << "x = ( x_1, x_2, x_3 ) = ";
-        cout << "( " << URL.get_Wniewiadome() << ")" << endl << endl;
-        blad = (URL.get_wspolczynniki() * URL.get_Wniewiadome()) - URL.get_wyrazy_wolne();
-        cout << "Wektor błędu:" << endl << "E = Ax - b = ( " << blad << ")" << endl << endl;
-        cout << "Długość wektora błędu:" << endl << "|| E || = " << blad.dlugosc_wektora() << endl;
-    } else {
-        cout << "Rozwiązanie:" << endl << URL.get_Nniewiadome() << endl;
-        cout << "Nie można wyznaczyć wektora błędu i jego długości." << endl;
+        case 'r':
+            {
+            SUkladRownanLiniowych <double, ROZMIAR> URLr;
+            SWektor <double, ROZMIAR> bladr;
+            std::cin >> URLr;
+            std::cout << "Układ równań liniowych o współczynnikach rzeczywistych:" << endl << URLr << endl;
+            a = URLr.rozwiaz();
+            if (a == 0)
+            {
+                std::cout << "Wektor rozwiązania:" << endl << "x = ( ";
+                for (i = 0; i < ROZMIAR; ++i)
+                {
+                    std::cout << "x_" << i << " ";
+                }
+                std::cout << ") = ( " << fixed << setprecision(2) << URLr.get_Wniewiadome() << ")" << endl << endl;
+                bladr = (URLr.get_wspolczynniki() * URLr.get_Wniewiadome()) - URLr.get_wyrazy_wolne();
+                std::cout << "Wektor błędu:" << endl << "E = Ax - b = ( " << scientific << setprecision(1) << bladr << ")" << endl << endl;
+                std::cout << "Długość wektora błędu:" << endl << "|| E || = " << bladr.dlugosc_wektora() << endl;
+            } else {
+                std::cout << "Rozwiązanie:" << endl << URLr.get_Nniewiadome() << endl;
+                std::cout << "Nie można wyznaczyć wektora błędu i jego długości." << endl;
+            }
+            break;
+            }
+        case 'z':
+            {
+            SUkladRownanLiniowych <LZespolona, ROZMIAR> URLLZ;
+            SWektor <LZespolona, ROZMIAR> bladLZ;
+            std::cin >> URLLZ;
+            std::cout << "Układ równań liniowych o współczynnikach zespolonych:" << endl << URLLZ << endl;
+            a = URLLZ.rozwiaz();
+            if (a == 0)
+            {
+                std::cout << "Wektor rozwiązania:" << endl << "x = ( ";
+                for (i = 0; i < ROZMIAR; ++i)
+                {
+                    std::cout << "x_" << i << " ";
+                }
+                std::cout << ") = (" << fixed << setprecision(2) << URLLZ.get_Wniewiadome() << ")" << endl << endl;
+                bladLZ = (URLLZ.get_wspolczynniki() * URLLZ.get_Wniewiadome()) - URLLZ.get_wyrazy_wolne();
+                std::cout << "Wektor błędu:" << endl << "E = Ax - b = (" << scientific << setprecision(1) << bladLZ << ")" << endl << endl;
+                std::cout << "Długość wektora błędu:" << endl << "|| E || = " << bladLZ.dlugosc_wektora() << endl;
+            } else {
+                std::cout << "Rozwiązanie:" << endl << URLLZ.get_Nniewiadome() << endl;
+                std::cout << "Nie można wyznaczyć wektora błędu i jego długości." << endl;
+            }
+            break;
+            }
+        default:
+            {
+            cerr << "Błąd: niepoprawna opcja. Poprawne opcje: r (liczby rzeczywiste), z (liczby zespolone)." << endl;
+            break;
+            }
     }
 }
-
-    /*
-    cout << endl << "TEST WCZYTYWANIA I WYSWIETLANIA WEKTORA:" << endl;
-    Wektor Wek;
-    cin >> Wek;
-    cout << endl << Wek << endl;
-    
-    cout << endl << "TEST WCZYTYWANIA I WYŚWIETLANIA MACIERZY:" << endl;
-    Macierz Mac;
-    cin >> Mac;
-    cout << endl << Mac;
-    
-    cout << endl << "TEST DZIALAN NA WEKTORACH:" << endl;
-    Wektor Wek1, Wek2, WynikW;
-    double Lic, WynikL;
-    Wek1[0] = 1;
-    Wek1[1] = 2;
-    Wek1[2] = 3;
-    Wek2[0] = 4;
-    Wek2[1] = 5;  
-    Wek2[2] = 6;
-    Lic = 2;
-
-    cout << "DODAWANIE:" << endl;
-    WynikW = Wek1 + Wek2;
-    cout << WynikW << endl << endl;
-
-    cout << "ODEJMOWANIE:" << endl;
-    WynikW = Wek1 - Wek2;
-    cout << WynikW << endl << endl;
-
-    cout << "MNOZENIE (ILOCZYN SKALARNY):" << endl;
-    WynikL = Wek1 * Wek2;
-    cout << WynikL << endl << endl;
-
-    cout << "MNOZENIE PRZEZ LICZBE:" << endl;
-    WynikW = Wek1 * Lic;
-    cout << WynikW << endl << endl;
-
-    cout << "DZIELENIE PRZEZ LICZBE:" << endl;
-    WynikW = Wek1 / Lic;
-    cout << WynikW << endl;
-
-    cout << "TEST PODNOSZNIA DO KWADRATU ELEMENTÓW MACIERZY:" << endl;
-    Macierz M1, M2;
-    cin >> M1;
-    M2 = M1.elementy2();
-    cout << endl << M2 << endl;
-
-    cout << "TEST ILOCZYNU WEKTOROWEGO:" << endl;
-    Wektor W1, W2, Wynik;
-    cin >> W1;
-    cin >> W2;
-    Wynik = W1.iloczyn_wektorowy(W2);
-    cout << endl << Wynik << endl;
-    
-    cout << endl << "KONIEC TESTOW" << endl;
-    */
